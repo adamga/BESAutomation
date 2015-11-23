@@ -1,0 +1,152 @@
+
+
+
+Batch file: "installer.cmd"
+
+net user /add bes12admin P2ssw0rd /expires:never /logonpasswordchg:no /comment:"BES administrator account"
+WMIC USERACCOUNT WHERE "Name='bes12admin'" SET PasswordExpires=FALSE
+net localgroup administrators bes12admin /add
+Setup.exe --script --iAcceptBESEULA --installSQL --properties "service.account.name=%Computername%\bes12admin,service.account.password=P2ssw0rd"
+
+rem Add bes12admin account to SQL Server
+sqlcmd -S %Computername%\BES -i .\createadmin.sql
+
+rem turn off ie es
+call turnofiec.cmd
+
+rem Copy shortcuts
+
+rem Delete Scheduled Tasks
+SchTasks /Delete /TN “Install BES 12”
+
+
+====================add bes12admin to sql ====================================================
+createadmin.sql
+==============================================================================================
+
+USE [master]
+GO
+
+/****** Object:  Login [AGAUTOINT1\bes12admin]    Script Date: 10/16/2015 5:46:09 PM ******/
+CREATE LOGIN [AGAUTOINT1\bes12admin] FROM WINDOWS WITH DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english]
+GO
+
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [AGAUTOINT1\bes12admin]
+GO
+
+
+
+
+
+================Scheduled Task Definition ========================================================
+Install BES 12.xml
+==================================================================================================
+
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Date>2015-10-16T16:38:20.4955343</Date>
+    <Author>AGAUTOINT1\adamga</Author>
+  </RegistrationInfo>
+  <Triggers>
+    <LogonTrigger>
+      <Enabled>true</Enabled>
+    </LogonTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <GroupId>S-1-5-32-544</GroupId>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>true</StopIfGoingOnBatteries>
+    <AllowHardTerminate>true</AllowHardTerminate>
+    <StartWhenAvailable>false</StartWhenAvailable>
+    <RunOnlyIfNetworkAvailable>false</RunOnlyIfNetworkAvailable>
+    <IdleSettings>
+      <StopOnIdleEnd>true</StopOnIdleEnd>
+      <RestartOnIdle>false</RestartOnIdle>
+    </IdleSettings>
+    <AllowStartOnDemand>true</AllowStartOnDemand>
+    <Enabled>true</Enabled>
+    <Hidden>false</Hidden>
+    <RunOnlyIfIdle>false</RunOnlyIfIdle>
+    <WakeToRun>false</WakeToRun>
+    <ExecutionTimeLimit>P3D</ExecutionTimeLimit>
+    <Priority>7</Priority>
+  </Settings>
+  <Actions Context="Author">
+    <Exec>
+      <Command>C:\BlackBerry\installer.cmd</Command>
+      <WorkingDirectory>C:\BlackBerry</WorkingDirectory>
+    </Exec>
+  </Actions>
+</Task>
+
+
+
+
+
+
+
+===============================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;SQLSERVER2008 Configuration File [SQLSERVER2008]
+; Setup will not display any user interface.
+QUIET="True"
+
+; Specifies a Setup work flow, like INSTALL, UNINSTALL, or UPGRADE. This is a required parameter.
+ACTION="Install"
+
+; Specifies that the console window is hidden or closed.
+HIDECONSOLE="True"
+
+; Specifies features to install, uninstall, or upgrade. The list of top-level
+features include SQL, AS, RS, IS, and Tools. The SQL feature will install the
+Database Engine, replication, and full-text. The Tools feature will install
+Management Tools, SQL Server Books Online, Business Intelligence Development Studio, and other
+shared components.
+FEATURES=SQL, TOOLS
+
+; Specify a default or named instance. MSSQLSERVER is the default instance for non-
+Express editions, and SQLExpress is the default instance for Express editions. This parameter is required when
+installing the SQL Server Database Engine (SQL), Analysis Services (AS), or Reporting
+Services (RS).
+INSTANCENAME="SQLEXPRESS"
+
+; Windows account(s) to provision as SQL Server system administrators.
+SQLSYSADMINACCOUNTS="Builtin\Administrators"
+
+; Account for SQL Server service: Domain\User or system account.
+/SQLSVCACCOUNT="<DomainName\UserName>"
+
+; Specifies the password for SQLSVCACCOUNT
+/SQLSVCPASSWORD="<StrongPassword>

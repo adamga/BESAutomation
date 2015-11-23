@@ -1,0 +1,6 @@
+# database type.  SQL_SERVER or POSTGRESQL
+configuration.database.ng.type=SQL_SERVER
+
+# for sqlserver using named instances, use both server= and instance= properties
+# for non sqlserver or not using named instances, leave instance blank
+

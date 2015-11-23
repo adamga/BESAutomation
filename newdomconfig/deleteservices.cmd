@@ -1,0 +1,8 @@
+sc delete "BESNG-Core" 
+sc delete "BES12 - BlackBerry Affinity Manager" 
+sc delete "BES12 - BlackBerry Dispatcher" 
+sc delete "BES - BlackBerry Gatekeeping Service" 
+sc delete "BES12 - BlackBerry MDS Connection Service" 
+sc delete "BESNG-P2E" 
+sc delete "BES - BlackBerry Work Connection Notification Service" 
+sc delete "BESNG-UI"  

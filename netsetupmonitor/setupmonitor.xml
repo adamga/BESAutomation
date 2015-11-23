@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SetupMonitor>
+      <statusfilename>c:\blackberry\setupdone.txt</statusfilename>
+      <logfilename>log.txt</logfilename>
+      <titlebartext>titlebar</titlebartext>
+      <noticetext>notice</noticetext>
+      <iconfilename>faviconTG7ZHKQN.ico</iconfilename>
+</SetupMonitor>
+

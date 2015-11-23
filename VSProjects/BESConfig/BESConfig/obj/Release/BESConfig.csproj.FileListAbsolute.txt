@@ -1,0 +1,10 @@
+C:\Users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\bin\Release\BESConfig.exe.config
+C:\Users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\bin\Release\BESConfig.exe
+C:\Users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\bin\Release\BESConfig.pdb
+C:\Users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\obj\Release\BESConfig.Form1.resources
+C:\Users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\obj\Release\BESConfig.Properties.Resources.resources
+C:\Users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\obj\Release\BESConfig.csproj.GenerateResource.Cache
+C:\Users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\obj\Release\BESConfig.exe
+C:\Users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\obj\Release\BESConfig.pdb
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\BESConfig\BESConfig\obj\Release\BESConfig.csprojResolveAssemblyReference.cache
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\BESConfig\BESConfig\obj\Release\BESConfig.Form2.resources

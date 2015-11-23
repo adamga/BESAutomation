@@ -1,0 +1,9 @@
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor\SetupMonitor\bin\Release\SetupMonitor.exe.config
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor\SetupMonitor\bin\Release\SetupMonitor.exe
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor\SetupMonitor\bin\Release\SetupMonitor.pdb
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor\SetupMonitor\obj\Release\SetupMonitor.Form1.resources
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor\SetupMonitor\obj\Release\SetupMonitor.Properties.Resources.resources
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor\SetupMonitor\obj\Release\SetupMonitor.csproj.GenerateResource.Cache
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor\SetupMonitor\obj\Release\SetupMonitor.exe
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor\SetupMonitor\obj\Release\SetupMonitor.pdb
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor\SetupMonitor\obj\Release\SetupMonitor.csprojResolveAssemblyReference.cache

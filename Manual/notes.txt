@@ -1,0 +1,12 @@
+
+
+You need a valid DNS infratructure to activate BES devices.
+
+You can also just set the DNS suffix under System, computer name, more ... set it to cloudapp.net to match Azure name resolution services/internal DNS... this is the image default
+
+This can be provided by an Active Directory Domain controller running DNS services. 
+
+To create a new active directory forest, you can either perform steps manually, or you can execute a helper batch file.
+under c:\blackberry, locate and execute the createnewforest.cmd file. Ensure the forest name, the netbios name, and safe mode admin password you choose meet standards. To find out more, search the microsoft support site at http://support.microsoft.com using the terms 'forest naming conventions'
+
+

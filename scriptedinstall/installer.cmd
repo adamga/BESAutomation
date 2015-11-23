@@ -1,0 +1,63 @@
+@echo off
+echo This task installs BlackBerry Enterprise Server 12.3 to this local system
+echo ...
+echo Please do not close this window until setup completes, and until
+echo you are prompted to close the installer.
+echo ...
+echo ##########################################################################
+echo ################  working on it ##########################################
+echo ##########################################################################
+echo ...
+echo Turning of IE Enhanced Configuration ...
+rem turn off ie es
+call turnofiec.cmd
+echo Done configuring IE...
+echo ...
+start iexplore.exe http://aka.ms/bes123welcome.html
+echo Creating Service Account...
+net user /add bes12service P2ssw0rd /expires:never /logonpasswordchg:no /comment:"BES service account"
+WMIC USERACCOUNT WHERE "Name='bes12service'" SET PasswordExpires=FALSE
+net localgroup administrators bes12service /add
+echo Done creating service account...
+echo ...
+
+echo Installing BES 12.3 ....
+cd\blackberry
+start "Installing BES..." /b /high /wait Setup.exe --script --iAcceptBESEULA --installSQL --properties "service.account.name=%Computername%\bes12service,service.account.password=P2ssw0rd"
+echo Done installing BES 12.1 ...
+echo ...
+echo Setting SQL Permissions ...
+rem Add bes12service account to SQL Server
+echo USE [master] >createadmin2.sql
+echo GO >>createadmin2.sql
+echo CREATE LOGIN [%computername%\bes12service] FROM WINDOWS WITH DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english]>>createadmin2.sql
+echo GO >>createadmin2.sql
+echo ALTER SERVER ROLE [sysadmin] ADD MEMBER [%computername%\bes12service]>>createadmin2.sql
+echo GO>>createadmin2.sql
+"C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\sqlcmd.exe" -S %Computername%\BES -i .\createadmin2.sql
+echo Done setting SQL Permissions ...
+echo ...
+
+
+echo Creating Shortcuts...
+rem Copy shortcuts
+copy "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BlackBerry Enterprise Service 12\*.*" %userprofile%\desktop
+xcopy .\desktop\*.* %userprofile%\desktop /s /e
+echo ...
+echo Cleaning Up...
+rem Delete Scheduled Tasks
+SchTasks /Delete /TN "Install BES 12" /F
+
+
+echo ##########################################################################
+echo ################  Done  ##################################################
+echo ##########################################################################
+echo The Installation is complete. Consult the Shortcuts on your desktop for
+echo more information on using this image.
+rem need to restart so BES services can connect to SQL Server ...
+echo done>c:\blackberry\setupdone.txt
+rem and clean up installer files
+cd c:\blackberry
+rd scr /s /q
+
+

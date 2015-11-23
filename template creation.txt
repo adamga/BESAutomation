@@ -1,0 +1,119 @@
+cmdkey /add:agarmimages.file.core.windows.net /user:agarmimages /pass:pwl1kl4dgFfMexgd+1Pp/WFFRnI+WV7Okz9eql5reprxO+M2WE7WLW44Ujp7RYL0QtpmWkkW/9rmp9jSPv9neQ==
+net use z: \\agarmimages.file.core.windows.net\storage 
+start z:
+
+
+rem Create local admin service account
+net user /add intgr8serviceacct P2ssw0rd /expires:never /logonpasswordchg:no /comment:"InteGREAT4TFS service account"
+WMIC USERACCOUNT WHERE "Name='intgr8serviceacct'" SET PasswordExpires=FALSE
+net localgroup administrators intgr8serviceacct /add
+rem configure rights
+ntrights +r SeServiceLogonRight -u "intgr8serviceacct" 
+
+rem change app pool identity
+cd\windows\system32\inetsrv
+appcmd set config /section:applicationPools /[name='intgr8appservice'].processModel.identityType:SpecificUser /[name='intgr8appservice'].processModel.userName:intgr8serviceacct /[name='intgr8appservice'].processModel.password:P2ssw0rd
+
+rem restart IIS
+iisreset
+
+@echo off
+REM Create a new AD Forest with DNS
+set /p forname=Please enter an AD Forest Name:
+set /p netbios=Please enter a NetBIOS Name for this domain (1-15 chars):
+set /p password=Please enter a safe mode Administrator password:
+
+dcpromo /unattend /InstallDNS:yes /dnsOnNetwork:yes /replicaOrNewDomain:domain /newDomain:forest /newDomainDNSName:%forname% /DomainNetbiosName:%netbios% /databasePath:"c:\windows\ntds" /logPath:"c:\windows\ntdslogs" /sysvolpath:"c:\windows\sysvol" /safeModeAdminPassword:"%password%" /forestLevel:2 /domainLevel:2 /rebootOnCompletion:no
+
+
+        string cmdline = @"dcpromo /unattend /InstallDns:yes /dnsOnNetwork:yes /replicaOrNewDomain:domain /newDomain:forest ";
+            cmdline += @"/newDomainDnsName:" + dom + " /DomainNetbiosName:" + netbios +" ";
+            cmdline += @"/databasePath:""c:\Windows\ntds"" /logPath:""c:\Windows\ntdslogs"" /sysvolpath:""c:\Windows\sysvol"" ";
+            cmdline += @"/safeModeAdminPassword:" + password + " /forestLevel:2 /domainLevel:2 /rebootOnCompletion:yes";
+
+
+
+Backup VM HDDs before "Capturing"
+azcopy /Source:https://agarmimages.blob.core.windows.net/vhds /dest:https://agarmimages.blob.core.windows.net/backup /sourcekey:pwl1kl4dgFfMexgd+1Pp/WFFRnI+WV7Okz9eql5reprxO+M2WE7WLW44Ujp7RYL0QtpmWkkW/9rmp9jSPv9neQ== /destkey:pwl1kl4dgFfMexgd+1Pp/WFFRnI+WV7Okz9eql5reprxO+M2WE7WLW44Ujp7RYL0QtpmWkkW/9rmp9jSPv9neQ== 
+
+
+/ACTION=Install /FEATURES=SQLEngine /INSTANCENAME=BES2 /SQLSVCACCOUNT=LOCALSYSTEM /SQLSYSADMINACCOUNTS=BUILTIN\ADMINISTRATORS /IACCEPTSQLSERVERLICENSETERMS=True"
+
+/QS /ACTION=Install /SkipRules=RebootRequiredCheck /FEATURES=SQL /INSTANCENAME=BES /SQLSVCACCOUNT="NT AUTHORITY\System" /SQLSYSADMINACCOUNTS=BUILTIN\ADMINISTRATORS /IACCEPTSQLSERVERLICENSETERMS=True /SQLSVCStartupType=Automatic /AddCurrentUserAsSqlAdmin /NPENABLED=1 /TCPENABLED=1
+
+Powershell
+
+	echo 'This script requires user credentials to install BES'
+	echo ' '
+	$USER = Read-Host 'Please enter an administrative user name for installation:'
+	$PASS = Read-Host 'Please enter the password for this account:'
+	echo ' '
+	echo 'Validating credentials...'
+	
+
+	Add-Type -AssemblyName System.DirectoryServices.AccountManagement
+ 
+	$Domain = $env:USERDOMAIN
+    $ComputerName = $env:COMPUTERNAME
+ 
+     <#
+	$ct = [System.DirectoryServices.AccountManagement.ContextType]::Domain
+	$pc = New-Object System.DirectoryServices.AccountManagement.PrincipalContext $ct,$Domain
+	$result = $pc.ValidateCredentials($USER,$PASS) #>
+
+    $DS = New-Object System.DirectoryServices.AccountManagement.PrincipalContext('machine',$ComputerName)
+    $result=$DS.ValidateCredentials($USER, $PASS)
+	
+	
+	if ($result -eq "true")
+	{
+        echo 'Credentials Validated.'
+        echo '  '
+
+        echo 'This script installs BlackBerry Enterprise Server 12 on this sytem.
+
+        It will prompt you to enter your administrative (logon) credentials to complete the installation. 
+
+        This installation will install/Enable:
+            Internet Information Services
+            SQL Server Express
+            BlackBerry Enterprise Server 12
+
+        Please be patient while the install completes. This script will notify you on completion...'
+
+        $foo = Read-Host 'Press ENTER to start the installation'
+
+
+        $host1 = $env:COMPUTERNAME
+        $USER =  $host1+"\"+$USER
+        $DBNAME = 'bes'
+
+        $username = $USER
+        $password = $PASS
+        $credentials = New-Object System.Management.Automation.PSCredential -ArgumentList @($username,(ConvertTo-SecureString -String $password -AsPlainText -Force))
+
+        $properties="db.instance=,db.port=1433,service.account.name=$USER,service.account.password=$PASS,db.static.port.enablement=,db.host1=$host1,db.name=$DBNAME,gcs.mdm.emailservice.smtp.host=$SMTP,common.logging.syslog.enabled=true,common.logging.syslog.host=localhost,ui.scheme=http,uos.pool.fqdn=localhost,uos.pool.port=8008,ui.port=8008"
+		
+        $parameters="db_instance=,db_port=1433,service_account_name=$USER,service_account_password=$PASS,db_static_port_enablement=,db_host1=$host1,db_name=$DBNAME,common_logging_syslog_enabled=true,common_logging_syslog_host=localhost,ui_scheme=http,uos_pool_fqdn=localhost,uos_pool_port=8008"
+        	$process = "C:\blackberry\Setup.exe" 
+        	$A="--script --deploy db --iAcceptBESEULA --installSQL --properties `"$properties`" --showlog"
+
+        	start-process -FilePath $process -ArgumentList $A -Credential ($credentials) -RedirectStandardOutput "c:\blackberry\log.txt"
+
+  
+
+                	<#start-process -FilePath $process -ArgumentList $A -Credential ($credentials) -RedirectStandardOutput "c:\blackberry\log.txt"#>
+
+
+        echo 'This script has completed.'
+        $foo = Read-Host 'Press ENTER to exit this installation'
+
+
+
+	}
+
+	else
+	{
+		echo 'Could not validate your credentials. Please check the user account and password, and try again.'
+	}
+

@@ -1,0 +1,16 @@
+c:\users\adamga\documents\visual studio 2015\Projects\SetupMonitor\SetupMonitor\bin\Debug\SetupMonitor.exe.config
+c:\users\adamga\documents\visual studio 2015\Projects\SetupMonitor\SetupMonitor\bin\Debug\SetupMonitor.exe
+c:\users\adamga\documents\visual studio 2015\Projects\SetupMonitor\SetupMonitor\bin\Debug\SetupMonitor.pdb
+c:\users\adamga\documents\visual studio 2015\Projects\SetupMonitor\SetupMonitor\obj\Debug\SetupMonitor.Form1.resources
+c:\users\adamga\documents\visual studio 2015\Projects\SetupMonitor\SetupMonitor\obj\Debug\SetupMonitor.Properties.Resources.resources
+c:\users\adamga\documents\visual studio 2015\Projects\SetupMonitor\SetupMonitor\obj\Debug\SetupMonitor.csproj.GenerateResource.Cache
+c:\users\adamga\documents\visual studio 2015\Projects\SetupMonitor\SetupMonitor\obj\Debug\SetupMonitor.exe
+c:\users\adamga\documents\visual studio 2015\Projects\SetupMonitor\SetupMonitor\obj\Debug\SetupMonitor.pdb
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor2\SetupMonitor\bin\Debug\SetupMonitor2.exe.config
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor2\SetupMonitor\bin\Debug\SetupMonitor2.exe
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor2\SetupMonitor\bin\Debug\SetupMonitor2.pdb
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor2\SetupMonitor\obj\Debug\SetupMonitor.Form1.resources
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor2\SetupMonitor\obj\Debug\SetupMonitor.Properties.Resources.resources
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor2\SetupMonitor\obj\Debug\SetupMonitor.csproj.GenerateResource.Cache
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor2\SetupMonitor\obj\Debug\SetupMonitor2.exe
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\SetupMonitor2\SetupMonitor\obj\Debug\SetupMonitor2.pdb

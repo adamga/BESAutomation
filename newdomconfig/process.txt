@@ -1,0 +1,17 @@
+1) Change Services
+2) Create Domain
+3) Reboot
+4) Add current user to sql
+5) Delete BlackBerry directory
+6) run BlackBerry setup
+7) Change Service Accounts
+8) Reboot
+
+
+
+echo y | wmic /node:computername /user:adminuser /password:password product where name="whatever" call uninstall
+"name like '%j2se%'"
+
+wmic /node:%computername% product where name="BES12" call uninstall
+
+wmic /node:%computername% product where name=""name like '%BES%'"" call uninstall

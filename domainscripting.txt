@@ -1,0 +1,34 @@
+
+set /p uname = "Please enter an AD Safe mode Administrator User Name"
+set /p pword = "Please enter a password for this account"
+set /p dnsname = "Please enter a new DNS name for this AD forest"
+set /p 
+
+
+
+dcpromo /unattend /InstallDns:yes /dnsOnNetwork:yes /replicaOrNewDomain:domain /newDomain:forest /newDomainDnsName:bes12demo.com /DomainNetbiosName:netbiosbes12 /databasePath:"c:\Windows\ntds" /logPath:"c:\Windows\ntdslogs" /sysvolpath:"c:\Windows\sysvol" /safeModeAdminPassword:P2ssw0rd /forestLevel:2 /domainLevel:2 /rebootOnCompletion:yes
+
+
+replaceparams: 
+
+bes12demo.com
+netbiosbes12
+P2ssw0rd
+
+
+
+alternative
+
+[DCINSTALL]
+InstallDNS=yes
+NewDomain=forest
+NewDomainDNSName=bes12demo.com
+DomainNetBiosName=<first label of the FQDN, by default>
+ReplicaOrNewDomain=domain
+ForestLevel=<forest functional level number>
+DomainLevel=<domain functional level number>
+DatabasePath=<path to a folder on a local volume, surrounded by double quotation marks>
+LogPath=<path to a folder on a local volume, surrounded by double quotation marks>
+SYSVOLPath=<path to a folder on a local volume, surrounded by double quotation marks>
+SafeModeAdminPassword=P2ssw0rd
+

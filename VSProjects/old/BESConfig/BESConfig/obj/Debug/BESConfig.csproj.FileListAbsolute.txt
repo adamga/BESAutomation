@@ -1,0 +1,11 @@
+c:\users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\bin\Debug\BESConfig.exe.config
+c:\users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\bin\Debug\BESConfig.exe
+c:\users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\bin\Debug\BESConfig.pdb
+c:\users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\obj\Debug\BESConfig.Form1.resources
+c:\users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\obj\Debug\BESConfig.Properties.Resources.resources
+c:\users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\obj\Debug\BESConfig.csproj.GenerateResource.Cache
+c:\users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\obj\Debug\BESConfig.exe
+c:\users\adamga\documents\visual studio 2015\Projects\BESConfig\BESConfig\obj\Debug\BESConfig.pdb
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\BESConfig\BESConfig\obj\Debug\BESConfig.Form2.resources
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\BESConfig\BESConfig\bin\Debug\moreinfolink.txt
+C:\Users\adamga\Documents\Visual Studio 2015\Projects\BESConfig\BESConfig\obj\Debug\BESConfig.Form3.resources

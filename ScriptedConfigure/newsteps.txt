@@ -1,0 +1,23 @@
+1) install bes
+2) activate SA account
+3) scripts/etc
+
+in script
+
+Create admin account
+runas /adminaccount createdb
+set services
+clean up
+reboot
+
+
+
+USE master ;
+GO
+DROP DATABASE bes ;
+GO
+
+
+delete:
+C:\Program Files\Microsoft SQL Server\MSSQL12.BES\MSSQL\DATA\bes.*
+C:\Program Files\Microsoft SQL Server\MSSQL12.BES\MSSQL\DATA\bes_log.*

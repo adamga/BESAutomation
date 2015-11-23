@@ -1,0 +1,33 @@
+configuration.database.ng.instance=BES
+
+# the port.  Can be blank if using named instance
+configuration.database.ng.port=
+
+# Service name.  Leave blank if not used
+configuration.database.ng.servicename=
+
+# database name for SQLServer.  Leave blank if not using SQLServer
+configuration.database.ng.name=bes
+
+# the authentication type.  USER or INTEGRATED (ie in SQLServer terms, sql authentication or NTLM)
+configuration.database.ng.authenticationtype=INTEGRATED
+
+# user and password.  The password is encrypted.
+# They are required for authenticationtype = USER and ignored for authenticationtype = INTEGRATED
+configuration.database.ng.user=
+configuration.database.ng.password=
+configuration.database.ng.password.plaintext=
+
+# optional settings to use failover
+configuration.database.ng.failover.server=
+# for non sqlserver or not using named instances, leave instance blank
+configuration.database.ng.failover.instance=BES
+# the port.  Can be blank if using named instance
+configuration.database.ng.failover.port=
+configuration.database.ng.alwayson=false
+
+# connection settings
+core.jdbc.connection.pool.minSize=100
+core.jdbc.connection.pool.maxSize=300
+hibernate.dialect=org.hibernate.dialect.SQLServerDialect
+jdbc.database_type=SQL_SERVER
